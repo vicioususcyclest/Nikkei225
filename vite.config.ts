@@ -12,5 +12,5 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
   },
-  base: 'Nikkei225',
+  base: '/Nikkei225/',
 }); 
