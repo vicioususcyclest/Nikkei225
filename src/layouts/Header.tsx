@@ -15,6 +15,9 @@ const Header = () => {
           <Button color='inherit' component={RouterLink} to='/product'>
             Product
           </Button>
+          <Button color='inherit' component={RouterLink} to='/calculator'>
+            Calculators
+          </Button>
           <Button color='inherit' component={RouterLink} to='/strategies'>
             Strategies
           </Button>
