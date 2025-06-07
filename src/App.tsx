@@ -13,12 +13,12 @@ const App: React.FC = () => {
     <Router>
       <Layout>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/product' element={<Product />} />
-          <Route path='/strategies' element={<Strategies />} />
-          <Route path='/calculator' element={<Calculator />} />
-          <Route path='/market-events' element={<MarketEvents />} />
-          <Route path='/resources' element={<Resources />} />
+          <Route path='/Nikkei225/' element={<Home />} />
+          <Route path='/Nikkei225/product' element={<Product />} />
+          <Route path='/Nikkei225/strategies' element={<Strategies />} />
+          <Route path='/Nikkei225/calculator' element={<Calculator />} />
+          <Route path='/Nikkei225/market-events' element={<MarketEvents />} />
+          <Route path='/Nikkei225/resources' element={<Resources />} />
         </Routes>
       </Layout>
     </Router>

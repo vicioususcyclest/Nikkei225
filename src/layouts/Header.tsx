@@ -9,22 +9,22 @@ const Header = () => {
           Nikkei 225 Mini
         </Typography>
         <Box sx={{ display: "flex", gap: 2 }}>
-          <Button color='inherit' component={RouterLink} to='/'>
+          <Button color='inherit' component={RouterLink} to='/Nikkei225/'>
             Home
           </Button>
-          <Button color='inherit' component={RouterLink} to='/product'>
+          <Button color='inherit' component={RouterLink} to='/Nikkei225/product'>
             Product
           </Button>
-          <Button color='inherit' component={RouterLink} to='/calculator'>
+          <Button color='inherit' component={RouterLink} to='/Nikkei225/calculator'>
             Calculators
           </Button>
-          <Button color='inherit' component={RouterLink} to='/strategies'>
+          <Button color='inherit' component={RouterLink} to='/Nikkei225/strategies'>
             Strategies
           </Button>
-          <Button color='inherit' component={RouterLink} to='/market-events'>
+          <Button color='inherit' component={RouterLink} to='/Nikkei225/market-events'>
             Market Events
           </Button>
-          <Button color='inherit' component={RouterLink} to='/resources'>
+          <Button color='inherit' component={RouterLink} to='/Nikkei225/resources'>
             Resources
           </Button>
         </Box>
