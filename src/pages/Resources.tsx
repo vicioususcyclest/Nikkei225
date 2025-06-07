@@ -43,6 +43,32 @@ const mockResources: ResourceItem[] = [
     redirect:
       "https://www.jpx.co.jp/english/derivatives/products/domestic/225mini/01.html",
   },
+  {
+    id: 2,
+    title: "Margin Calculation Method (VaR Method) for Futures and Options",
+    type: "Web",
+    description:
+      "With 2 types of calculation method, i.e. Historical Simulation Method (HS-VaR Method) and Alternative Simulation Method (AS-VaR Method).",
+    redirect:
+      "https://www.jpx.co.jp/jscc/en/cash/futures/marginsystem/VaR.html",
+  },
+  {
+    id: 3,
+    title: "Futures Quotes",
+    type: "Web",
+    description:
+      "Future quotation price provided by JPX, with Whole Day, Day and Night session available.",
+    redirect:
+      "https://port.jpx.co.jp/jpxhp/main/index.aspx?F=e_future&disptype=day_through",
+  },
+  {
+    id: 4,
+    title: "Nikkei 225 Mini period references",
+    type: "Web",
+    description: "Japanese only",
+    redirect:
+      "https://www.jpx.co.jp/derivatives/products/domestic/225mini/tvdivq00000027vy-att/derivative560_01.pdf",
+  },
 ];
 
 const Resources = () => {

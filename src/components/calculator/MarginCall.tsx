@@ -12,52 +12,63 @@ import { TabValue } from "../../pages/Calculator";
 import CustomTabPanel from "../global/TabPanel";
 import { useState } from "react";
 import { liquidationPrice } from "../../../utils/calculation/liquidation";
+import { leverageCalculation } from "../../../utils/calculation/leverage";
 
 const MarginCall = ({ tabVal }: { tabVal: TabValue }) => {
+  const [entryPrice, setEntryPrice] = useState(33000);
+  const [initialMargin, setInitialMargin] = useState(170000);
   const [marginCall, setMarginCall] = useState({
-    entryPrice: 31000,
-    initialMargin: 170000,
     contracts: 1,
     side: 0, // side = 0: Long, side = 1: short
   });
 
   return (
     <CustomTabPanel value={tabVal} index={TabValue.MarginCallChecker}>
-      <Grid container direction={"column"} spacing={3}>
+      <Grid container direction={"column"} spacing={4}>
+        <Grid item xs={12}>
+          <Box>
+            <TextField
+              fullWidth
+              label='Entry Price'
+              type='number'
+              value={entryPrice}
+              onChange={(e) => setEntryPrice(Number(e.target.value))}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box>
+            <TextField
+              fullWidth
+              label='Initial Margin'
+              type='number'
+              value={initialMargin}
+              onChange={(e) => setInitialMargin(Number(e.target.value))}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Card>
+            <CardContent>
+              <Typography variant='h6' gutterBottom>
+                Leverage Ratio Calculator
+              </Typography>
+              <Typography variant='h4' color={"primary"}>
+                ~{leverageCalculation(entryPrice, initialMargin).toFixed(1)}x
+                leverage for this position
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
         <Grid item xs={12}>
           <Card>
             <CardContent>
               <Typography variant='h6' gutterBottom>
                 Liquidation Price Calculator
               </Typography>
-              <Box sx={{ mb: 3 }}>
-                <TextField
-                  fullWidth
-                  label='Entry Price'
-                  type='number'
-                  value={marginCall.entryPrice}
-                  onChange={(e) =>
-                    setMarginCall({
-                      ...marginCall,
-                      entryPrice: Number(e.target.value),
-                    })
-                  }
-                />
-              </Box>
-              <Box sx={{ mb: 3 }}>
-                <TextField
-                  fullWidth
-                  label='Initial Margin'
-                  type='number'
-                  value={marginCall.initialMargin}
-                  onChange={(e) =>
-                    setMarginCall({
-                      ...marginCall,
-                      initialMargin: Number(e.target.value),
-                    })
-                  }
-                />
-              </Box>
+
               <Box sx={{ mb: 3 }}>
                 <TextField
                   fullWidth
@@ -92,8 +103,8 @@ const MarginCall = ({ tabVal }: { tabVal: TabValue }) => {
               <Typography variant='h4' color={"primary"}>
                 ¥
                 {liquidationPrice(
-                  marginCall.entryPrice,
-                  marginCall.initialMargin,
+                  entryPrice,
+                  initialMargin,
                   marginCall.contracts,
                   marginCall.side
                 )}

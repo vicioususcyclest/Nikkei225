@@ -61,29 +61,43 @@ const NotionalAndTick = ({ tabVal }: { tabVal: TabValue }) => {
           </Grid>
         </Grid>
 
-        <Grid item xs={12}>
-          <Card>
-            <CardContent>
-              <Typography variant='h6' gutterBottom>
-                Notional Calculator
-              </Typography>
-              <Box sx={{ mb: 3 }}>
-                <TextField
-                  fullWidth
-                  label='Contract Price'
-                  type='number'
-                  value={notionalPrice}
-                  onChange={(e) => setNotionalPrice(Number(e.target.value))}
-                />
-              </Box>
-              <Typography variant='h6' gutterBottom>
-                Total Notional Value
-              </Typography>
-              <Typography variant='h4' color={"primary"}>
-                ¥{notionalCalculation(notionalPrice, contractSize)}
-              </Typography>
-            </CardContent>
-          </Card>
+        <Grid container item spacing={2}>
+          <Grid item xs={6}>
+            <Card>
+              <CardContent>
+                <Typography variant='h6' gutterBottom>
+                  Notional Calculator
+                </Typography>
+                <Box sx={{ mb: 3 }}>
+                  <TextField
+                    fullWidth
+                    label='Contract Price'
+                    type='number'
+                    value={notionalPrice}
+                    onChange={(e) => setNotionalPrice(Number(e.target.value))}
+                  />
+                </Box>
+                <Typography variant='h6' gutterBottom>
+                  Total Notional Value
+                </Typography>
+                <Typography variant='h4' color={"primary"}>
+                  ¥{notionalCalculation(notionalPrice, contractSize)}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={6}>
+            <Card>
+              <CardContent>
+                <Typography variant='h6' gutterBottom>
+                  Notional Value
+                </Typography>
+                <Typography variant='body1'>
+                  Total market exposure, calculated by 100x of price.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
       </Grid>
     </CustomTabPanel>
