@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Typography,
@@ -12,89 +12,64 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
-} from '@mui/material';
+} from "@mui/material";
 import {
   PictureAsPdf,
   TableChart,
   VideoLibrary,
   Description,
   School,
-} from '@mui/icons-material';
+  Web,
+} from "@mui/icons-material";
 
 interface ResourceItem {
   id: number;
   title: string;
-  type: 'PDF' | 'Excel' | 'Video';
+  type: "PDF" | "Excel" | "Video" | "Web";
   description: string;
   thumbnail?: string;
   size?: string;
   duration?: string;
+  redirect?: string;
 }
 
 const mockResources: ResourceItem[] = [
   {
     id: 1,
-    title: 'Nikkei 225 Mini Trading Guide',
-    type: 'PDF',
-    description: 'Comprehensive guide to trading Nikkei 225 Mini futures',
-    size: '2.5 MB',
-  },
-  {
-    id: 2,
-    title: 'Margin Calculator Template',
-    type: 'Excel',
-    description: 'Excel template for calculating margin requirements',
-    size: '1.2 MB',
-  },
-  {
-    id: 3,
-    title: 'Introduction to Nikkei 225 Mini',
-    type: 'Video',
-    description: 'Learn the basics of Nikkei 225 Mini futures trading',
-    duration: '15:30',
-    thumbnail: 'https://via.placeholder.com/300x200',
-  },
-  {
-    id: 4,
-    title: 'Advanced Trading Strategies',
-    type: 'PDF',
-    description: 'Detailed guide to advanced trading strategies',
-    size: '3.1 MB',
-  },
-  {
-    id: 5,
-    title: 'Market Analysis Template',
-    type: 'Excel',
-    description: 'Template for technical and fundamental analysis',
-    size: '1.8 MB',
-  },
-  {
-    id: 6,
-    title: 'Risk Management Best Practices',
-    type: 'Video',
-    description: 'Learn how to manage risk in futures trading',
-    duration: '20:15',
-    thumbnail: 'https://via.placeholder.com/300x200',
+    title: "Contract Specification: Nikkei 225 Mini",
+    type: "Web",
+    description:
+      "Nikkei 225 Mini's Contract Specification by Japan Exchange Group (JPX)",
+    redirect:
+      "https://www.jpx.co.jp/english/derivatives/products/domestic/225mini/01.html",
   },
 ];
 
 const Resources = () => {
   const getIcon = (type: string) => {
     switch (type) {
-      case 'PDF':
-        return <PictureAsPdf color="error" />;
-      case 'Excel':
-        return <TableChart color="success" />;
-      case 'Video':
-        return <VideoLibrary color="primary" />;
+      case "PDF":
+        return <PictureAsPdf color='error' />;
+      case "Excel":
+        return <TableChart color='success' />;
+      case "Video":
+        return <VideoLibrary color='primary' />;
+      case "Web":
+        return <Web color='primary' />;
       default:
         return <Description />;
     }
   };
 
+  const onBtnClicked = (type: string, redirect?: string) => {
+    if (type == "Web") {
+      window.open(redirect, "_blank");
+    }
+  };
+
   return (
     <Box>
-      <Typography variant="h4" component="h1" gutterBottom>
+      <Typography variant='h4' component='h1' gutterBottom>
         Educational Resources
       </Typography>
 
@@ -103,13 +78,13 @@ const Resources = () => {
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
-                <School sx={{ mr: 1, verticalAlign: 'middle' }} />
-                Downloadable Materials
+              <Typography variant='h6' gutterBottom>
+                <School sx={{ mr: 1, verticalAlign: "middle" }} />
+                Accessible Materials
               </Typography>
               <List>
                 {mockResources
-                  .filter((resource) => resource.type !== 'Video')
+                  .filter((resource) => resource.type !== "Video")
                   .map((resource) => (
                     <React.Fragment key={resource.id}>
                       <ListItem>
@@ -121,20 +96,24 @@ const Resources = () => {
                               {resource.description}
                               <br />
                               <Typography
-                                component="span"
-                                variant="body2"
-                                color="text.secondary"
-                              >
+                                component='span'
+                                variant='body2'
+                                color='text.secondary'>
                                 {resource.size}
                               </Typography>
                             </>
                           }
                         />
-                        <Button variant="outlined" size="small">
-                          Download
+                        <Button
+                          variant='outlined'
+                          size='small'
+                          onClick={() =>
+                            onBtnClicked(resource.type, resource.redirect)
+                          }>
+                          {resource.type == "Web" ? "Access" : "Download"}
                         </Button>
                       </ListItem>
-                      <Divider component="li" />
+                      <Divider component='li' />
                     </React.Fragment>
                   ))}
               </List>
@@ -146,38 +125,40 @@ const Resources = () => {
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
-                <VideoLibrary sx={{ mr: 1, verticalAlign: 'middle' }} />
+              <Typography variant='h6' gutterBottom>
+                <VideoLibrary sx={{ mr: 1, verticalAlign: "middle" }} />
                 Video Library
               </Typography>
               <Grid container spacing={2}>
                 {mockResources
-                  .filter((resource) => resource.type === 'Video')
+                  .filter((resource) => resource.type === "Video")
                   .map((resource) => (
                     <Grid item xs={12} key={resource.id}>
-                      <Card variant="outlined">
+                      <Card variant='outlined'>
                         <CardMedia
-                          component="img"
-                          height="140"
+                          component='img'
+                          height='140'
                           image={resource.thumbnail}
                           alt={resource.title}
                         />
                         <CardContent>
-                          <Typography variant="h6" gutterBottom>
+                          <Typography variant='h6' gutterBottom>
                             {resource.title}
                           </Typography>
-                          <Typography variant="body2" color="text.secondary" paragraph>
+                          <Typography
+                            variant='body2'
+                            color='text.secondary'
+                            paragraph>
                             {resource.description}
                           </Typography>
-                          <Typography variant="body2" color="text.secondary">
+                          <Typography variant='body2' color='text.secondary'>
                             Duration: {resource.duration}
                           </Typography>
                           <Button
-                            variant="contained"
-                            color="primary"
+                            variant='contained'
+                            color='primary'
                             fullWidth
-                            sx={{ mt: 2 }}
-                          >
+                            sx={{ mt: 2 }}>
                             Watch Now
                           </Button>
                         </CardContent>
@@ -193,55 +174,66 @@ const Resources = () => {
         <Grid item xs={12}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant='h6' gutterBottom>
                 Additional Resources
               </Typography>
               <Grid container spacing={2}>
                 <Grid item xs={12} md={4}>
-                  <Card variant="outlined">
+                  <Card variant='outlined'>
                     <CardContent>
-                      <Typography variant="subtitle1" gutterBottom>
+                      <Typography variant='subtitle1' gutterBottom>
                         Market Data
                       </Typography>
-                      <Typography variant="body2" paragraph>
-                        Access real-time market data, historical prices, and technical indicators.
+                      <Typography variant='body2' paragraph>
+                        Access real-time market data from tradingview's Nikkei
+                        225 Mini Futures chart. Data can be selectable from
+                        different contracts.
                       </Typography>
-                      <Button variant="outlined" fullWidth>
+                      <Button
+                        variant='outlined'
+                        fullWidth
+                        onClick={() => {
+                          window.open(
+                            "https://www.tradingview.com/symbols/OSE-NK225M1!/",
+                            "_blank"
+                          );
+                        }}>
                         View Market Data
                       </Button>
                     </CardContent>
                   </Card>
                 </Grid>
-                <Grid item xs={12} md={4}>
-                  <Card variant="outlined">
+                {/* <Grid item xs={12} md={4}>
+                  <Card variant='outlined'>
                     <CardContent>
-                      <Typography variant="subtitle1" gutterBottom>
+                      <Typography variant='subtitle1' gutterBottom>
                         Trading Tools
                       </Typography>
-                      <Typography variant="body2" paragraph>
-                        Interactive tools for technical analysis and strategy development.
+                      <Typography variant='body2' paragraph>
+                        Interactive tools for technical analysis and strategy
+                        development.
                       </Typography>
-                      <Button variant="outlined" fullWidth>
+                      <Button variant='outlined' fullWidth>
                         Access Tools
                       </Button>
                     </CardContent>
                   </Card>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <Card variant="outlined">
+                </Grid> */}
+                {/* <Grid item xs={12} md={4}>
+                  <Card variant='outlined'>
                     <CardContent>
-                      <Typography variant="subtitle1" gutterBottom>
+                      <Typography variant='subtitle1' gutterBottom>
                         Community
                       </Typography>
-                      <Typography variant="body2" paragraph>
+                      <Typography variant='body2' paragraph>
                         Join our trading community for discussions and insights.
                       </Typography>
-                      <Button variant="outlined" fullWidth>
+                      <Button variant='outlined' fullWidth>
                         Join Community
                       </Button>
                     </CardContent>
                   </Card>
-                </Grid>
+                </Grid> */}
               </Grid>
             </CardContent>
           </Card>
@@ -251,4 +243,4 @@ const Resources = () => {
   );
 };
 
-export default Resources; 
+export default Resources;
