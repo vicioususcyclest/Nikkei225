@@ -69,6 +69,14 @@ const mockResources: ResourceItem[] = [
     redirect:
       "https://www.jpx.co.jp/derivatives/products/domestic/225mini/tvdivq00000027vy-att/derivative560_01.pdf",
   },
+  {
+    id: 5,
+    title: "Micro Nikkei (USD) Overview - CME Group",
+    type: "Web",
+    description: "Overview og Micro Nikkei Contract by CME Group.",
+    redirect:
+      "https://www.cmegroup.com/markets/equities/international-indices/micro-nikkei-usd.html",
+  },
 ];
 
 const Resources = () => {
@@ -101,7 +109,7 @@ const Resources = () => {
 
       <Grid container spacing={3}>
         {/* Downloadable Materials */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <Card>
             <CardContent>
               <Typography variant='h6' gutterBottom>
@@ -148,7 +156,7 @@ const Resources = () => {
         </Grid>
 
         {/* Video Library */}
-        <Grid item xs={12} md={6}>
+        {/* <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
               <Typography variant='h6' gutterBottom>
@@ -194,7 +202,7 @@ const Resources = () => {
               </Grid>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid> */}
 
         {/* Additional Resources */}
         <Grid item xs={12}>
