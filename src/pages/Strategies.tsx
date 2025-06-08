@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Box, Typography, Tabs, Tab } from "@mui/material";
-import { CalendarSpread } from "../components/strategies/CalendarSpread";
 import Straddle from "../components/strategies/Straddle";
 import ContractComparator from "../components/strategies/ContractComparator";
 import BearPutHedgeCalculator from "../components/strategies/BearPut";
