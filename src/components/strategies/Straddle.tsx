@@ -178,6 +178,11 @@ export default function StraddleWithFuturesCalc({
               <Typography variant='h5' mb={3}>
                 What is Straddle
               </Typography>
+              <Typography variant='body1'>
+                The straddle is designed to profit from large price movements —
+                up or down — when you expect high volatility but have no
+                directional bias.
+              </Typography>
             </CardContent>
           </Card>
         </Grid>
