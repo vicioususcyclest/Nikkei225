@@ -3,17 +3,16 @@ import { Box, Typography, Tabs, Tab } from "@mui/material";
 import { CalendarSpread } from "../components/strategies/CalendarSpread";
 import Straddle from "../components/strategies/Straddle";
 import ContractComparator from "../components/strategies/ContractComparator";
+import BearPutHedgeCalculator from "../components/strategies/BearPut";
 
 export enum StrategiesTab {
-  CalendarSpread,
+  BearPut,
   Straddle,
   CmeOseComparison,
 }
 
 const Strategies = () => {
-  const [value, setValue] = useState<StrategiesTab>(
-    StrategiesTab.CalendarSpread
-  );
+  const [value, setValue] = useState<StrategiesTab>(StrategiesTab.BearPut);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -27,13 +26,13 @@ const Strategies = () => {
 
       <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 3 }}>
         <Tabs value={value} onChange={handleChange} aria-label='strategy tabs'>
-          <Tab label='Calendar Spread' />
+          <Tab label='Bear Put' />
           <Tab label='Straddle/Strangle' />
           <Tab label='CME Macro & OSE Mini Comparison' />
         </Tabs>
       </Box>
 
-      <CalendarSpread tabVal={value} />
+      <BearPutHedgeCalculator tabVal={value} />
       <Straddle tabVal={value} />
       <ContractComparator tabVal={value} />
 
