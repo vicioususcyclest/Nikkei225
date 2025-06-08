@@ -16,7 +16,7 @@ import {
 import { StrategiesTab } from "../../pages/Strategies";
 import TabPanel from "../global/TabPanel";
 
-export default function StraddleWithFuturesCalc({
+export default function StrangleWithFuturesCalc({
   tabVal,
 }: {
   tabVal: StrategiesTab;
@@ -26,9 +26,10 @@ export default function StraddleWithFuturesCalc({
     position: "long",
     futuresEntry: 39000,
     expiryPrice: 37500,
-    strikePrice: 39000,
-    callPremium: 400,
-    putPremium: 450,
+    callStrike: 40000,
+    callPremium: 350,
+    putStrike: 38000,
+    putPremium: 300,
     multiplier: 100,
   });
 
@@ -53,14 +54,15 @@ export default function StraddleWithFuturesCalc({
       position,
       futuresEntry,
       expiryPrice,
-      strikePrice,
+      callStrike,
       callPremium,
+      putStrike,
       putPremium,
       multiplier,
     } = inputs;
 
-    const callValue = Math.max(0, expiryPrice - strikePrice) * multiplier;
-    const putValue = Math.max(0, strikePrice - expiryPrice) * multiplier;
+    const callValue = Math.max(0, expiryPrice - callStrike) * multiplier;
+    const putValue = Math.max(0, putStrike - expiryPrice) * multiplier;
     const optionPremium = (callPremium + putPremium) * multiplier;
     const optionPnL = callValue + putValue - optionPremium;
 
@@ -78,13 +80,13 @@ export default function StraddleWithFuturesCalc({
   };
 
   return (
-    <TabPanel value={tabVal} index={StrategiesTab.Straddle}>
+    <TabPanel value={tabVal} index={StrategiesTab.Strangle}>
       <Grid container spacing={2}>
         <Grid item xs={8}>
           <Card>
             <CardContent>
               <Typography variant='h5' mb={3}>
-                Straddle Calculator
+                Strangle Calculator
               </Typography>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -130,17 +132,21 @@ export default function StraddleWithFuturesCalc({
 
                 {[
                   "expiryPrice",
-                  "strikePrice",
+                  "callStrike",
                   "callPremium",
+                  "putStrike",
                   "putPremium",
-                  "multiplier",
                 ].map((key) => (
                   <Grid item xs={6} sm={4} key={key}>
                     <TextField
                       fullWidth
-                      label={key
-                        .replace(/([A-Z])/g, " $1")
-                        .replace(/^./, (str) => str.toUpperCase())}
+                      label={
+                        key === "expiryPrice"
+                          ? "Final settlement price"
+                          : key
+                              .replace(/([A-Z])/g, " $1")
+                              .replace(/^./, (str) => str.toUpperCase())
+                      }
                       name={key}
                       type='number'
                       value={(inputs as any)[key]}
@@ -175,8 +181,13 @@ export default function StraddleWithFuturesCalc({
         <Grid item xs={4}>
           <Card>
             <CardContent>
-              <Typography variant='h5' mb={3}>
-                What is Straddle
+              <Typography variant='h5' mb={2}>
+                What is Strangle
+              </Typography>
+              <Typography variant='body1'>
+                A strangle profits from large moves in either direction, while
+                costing less than a straddle. It’s good when you expect
+                volatility, but not sure which way the index will move.
               </Typography>
             </CardContent>
           </Card>

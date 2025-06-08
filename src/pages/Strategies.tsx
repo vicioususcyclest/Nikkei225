@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Box, Typography, Tabs, Tab } from "@mui/material";
-import Straddle from "../components/strategies/Straddle";
 import ContractComparator from "../components/strategies/ContractComparator";
 import BearPutHedgeCalculator from "../components/strategies/BearPut";
+import StrangleWithFuturesCalc from "../components/strategies/Strangle";
+import StraddleWithFuturesCalc from "../components/strategies/Straddle";
 
 export enum StrategiesTab {
   BearPut,
+  Strangle,
   Straddle,
   CmeOseComparison,
 }
@@ -26,13 +28,15 @@ const Strategies = () => {
       <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 3 }}>
         <Tabs value={value} onChange={handleChange} aria-label='strategy tabs'>
           <Tab label='Bear Put' />
-          <Tab label='Straddle/Strangle' />
+          <Tab label='Strangle' />
+          <Tab label='Straddle' />
           <Tab label='CME Macro & OSE Mini Comparison' />
         </Tabs>
       </Box>
 
       <BearPutHedgeCalculator tabVal={value} />
-      <Straddle tabVal={value} />
+      <StrangleWithFuturesCalc tabVal={value} />
+      <StraddleWithFuturesCalc tabVal={value} />
       <ContractComparator tabVal={value} />
 
       {/* generated margin calculator initially */}
